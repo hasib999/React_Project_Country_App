@@ -6,6 +6,7 @@ const Country = (props) => {
   const handleRemoveCountry = (name) => {
     props.onRemoveCountry(name);
   };
+
   return (
     <article className={style.country}>
       <div>

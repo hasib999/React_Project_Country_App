@@ -12,7 +12,8 @@ function App() {
   const [error, setError] = useState(null);
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState(countries);
-
+  const [count,setCount] = useState();
+  
   const fetchData = async (url) => {
     setIsLoading(true);
     try {
@@ -27,7 +28,6 @@ function App() {
       setError(error);
     }
   };
-
   useEffect(() => {
     fetchData(url);
   }, []);
@@ -35,15 +35,21 @@ function App() {
     const filter = filteredCountries.filter(
       (country) => country.name.common !== name
     );
-    setFilteredCountries(filter)
+    setFilteredCountries(filter);
   };
   const handleSearch=(searchText)=>{
-    alert(searchText)
+    var value = searchText.toLowerCase();
+    const newCountries = countries.filter((country)=>{
+      const countryName = country.name.common.toLowerCase();
+      return countryName.startsWith(value);
+    });
+    setCount(newCountries.length);
+    setFilteredCountries(newCountries);
   }
   return (
     <>
       <h1>Country App</h1>
-      <Search onSearch={handleSearch}/>
+      <Search onSearch={handleSearch} count={count}/>
       {isLoading && <h2>Loading...</h2>}
       {error && <h2>{error.message}</h2>}
       {countries && (
