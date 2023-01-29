@@ -13,7 +13,7 @@ function App() {
   const [countries, setCountries] = useState([]);
   const [filteredCountries, setFilteredCountries] = useState(countries);
   const [count,setCount] = useState();
-  
+  let currencies = [];
   const fetchData = async (url) => {
     setIsLoading(true);
     try {
